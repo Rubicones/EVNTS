@@ -89,7 +89,7 @@ function Week({ startingDay }) {
         }
 
         setWeekDays(daysOfWeek);
-    }, [startingDay]);
+    }, [startingDay, events]);
 
     return <div className={styles.weekContainer}>{weekDays}</div>;
 }
