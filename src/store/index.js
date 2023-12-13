@@ -1,7 +1,37 @@
 import { configureStore } from "@reduxjs/toolkit";
 
 const init = {
-    events: {},
+    events: {
+        // "11/20/2023": [
+        //     {
+        //         date_end: "11/27/2023",
+        //         date_start: "11/20/2023",
+        //         description: "No descrsdfiption available",
+        //         location: "Istanbul, Turkey",
+        //         ticket_price: "$200",
+        //         title: "Istanbul Blockchain Week 2023",
+        //         url: "https://istanbulblockchainweek.com",
+        //     },
+        //     {
+        //         date_end: "11/27/2023",
+        //         date_start: "11/20/2023",
+        //         description: "No descripfstion available",
+        //         location: "Istanbul, Turkey",
+        //         ticket_price: "$200",
+        //         title: "Istanbul Blockchain Week 2023",
+        //         url: "https://istanbulblockchainweek.com",
+        //     },
+        //     {
+        //         date_end: "11/27/2023",
+        //         date_start: "11/20/2023",
+        //         description: "No descripfsdtion available",
+        //         location: "Istanbul, Turkey",
+        //         ticket_price: "$200",
+        //         title: "Istanbul Blockchain Week 2023",
+        //         url: "https://istanbulblockchainweek.com",
+        //     },
+        // ],
+    },
 };
 const reducer = (state = init, action) => {
     switch (action.type) {

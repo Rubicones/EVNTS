@@ -1,23 +1,22 @@
-$accent:#D783FF
-$accentTransp: #d883ff6c
+$accent:#674AE9
+$accentTransp: #674ae950
     
 .weekWrapper
     display: flex
     flex-direction: column
     gap: 10px
-    width: 60vw
+    width: 50%
+    min-width: 490px
     max-height: 80%
-    margin-left: 200px
+    margin-left: 20px
     margin-top: 20px
 
     .navigation
-        min-width: calc(120px * 7)
-
+        min-width: calc(70px * 7)
         display: flex
         flex-direction: row
         justify-content: flex-end
         gap: 10px
-
         .arrowFlipped
             transform: rotate(180deg)
 
@@ -33,7 +32,6 @@ $accentTransp: #d883ff6c
             flex-direction: column
             justify-content: flex-start
 
-
             width: 100%
             height: 100%
             min-height: 200px
@@ -42,8 +40,9 @@ $accentTransp: #d883ff6c
 
             .weekDay
                 height: 100%
-                min-height: 300px
-                min-width: 120px
+                min-height: 200px
+                min-width: 70px
+                width: 100%
                 margin-top: 6px
                 position: relative
 
