@@ -32,6 +32,9 @@ const init = {
         //     },
         // ],
     },
+    uniqueEvents: {
+
+    }
 };
 const reducer = (state = init, action) => {
     switch (action.type) {

@@ -5,30 +5,28 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Inter } from "next/font/google";
 import Image from "next/image";
-import {v4 as uuidv4} from 'uuid';
-import ChevronLeftIcon from '@gravity-ui/icons/svgs/chevron-left.svg';
-import ChevronRightIcon from '@gravity-ui/icons/svgs/chevron-right.svg';
-
-const interLight = Inter({ subsets: ["latin"], weight: "300" });
-const interSemiBold = Inter({ subsets: ["latin"], weight: "400" });
-const interBold = Inter({ subsets: ["latin"], weight: "500" });
+import { v4 as uuidv4 } from "uuid";
+import ChevronLeftIcon from "@gravity-ui/icons/svgs/chevron-left.svg";
+import ChevronRightIcon from "@gravity-ui/icons/svgs/chevron-right.svg";
+import { Text } from "@gravity-ui/uikit";
 
 const WeekEvent = ({ title, location, cost }) => {
     return (
         <div className={styles.weekEventContainer}>
-            <span className={`${styles.weekEventTitle} ${interBold.className}`}>
+            <Text variant="caption-2" className={styles.weekEventTitle}>
                 {title}
-            </span>
-            <span
-                className={`${styles.weekEventLocation} ${interSemiBold.className}`}
+            </Text>
+            <Text
+                variant="caption-1"
+                color="dark-secondary"
+                className={styles.weekEventLocation}
             >
                 {location}
-            </span>
-            <span
-                className={`${styles.weekEventCost} ${interSemiBold.className}`}
-            >
+            </Text>
+            <Text variant="body-1" className={styles.weekEventCost}>
+                {" "}
                 {cost}
-            </span>
+            </Text>
         </div>
     );
 };
@@ -55,15 +53,15 @@ function Week({ payload }) {
                 >
                     {day.isSame(today, "day") ? (
                         <div className={styles.todayWrapper}>
-                            <div
-                                className={`${styles.date} ${interSemiBold.className}`}
+                            <Text
+                                variant="body-3"
                                 style={{ color: "white" }}
-                            >{`${day.date()} ${monthName.slice(0, 3)}`}</div>
+                            >{`${day.date()} ${monthName.slice(0, 3)}`}</Text>
                         </div>
                     ) : (
-                        <div
-                            className={`${styles.date} ${interLight.className}`}
-                        >{`${day.date()} ${monthName.slice(0, 3)}`}</div>
+                        <Text variant="body-2">
+                            {`${day.date()} ${monthName.slice(0, 3)}`}
+                        </Text>
                     )}
                     <div
                         className={styles.weekDay}

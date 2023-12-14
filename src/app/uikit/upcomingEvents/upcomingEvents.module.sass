@@ -1,10 +1,65 @@
+$accent:#674AE9
+$accentTransp: #674ae950
 
 .upcomingWrapper
     width: 350px
     margin-top: 20px
+    margin-left: 20px
 
     .upcomingHeader
         font-size: 25px
 
     .upcomingNavbar
         width: 100%
+        margin-top: 20px
+
+        display: flex
+        gap: 5%
+        .navSearch
+            width: 60%
+
+        .navDropdown
+            width: 35%
+
+    .eventsContainer
+        width: 100%
+        margin-top: 10px
+        height: 400px
+
+        display: flex
+        flex-direction: column
+        justify-content: flex-start
+        gap: 5px
+        overflow: scroll
+
+        &::-webkit-scrollbar
+            display: none
+        
+
+        .smallEventContainer
+            width: 100%
+            min-height: 100px
+            padding: 10px
+
+            display: grid
+            grid-template-columns: 30% 30% 30%
+            gap: 3%
+
+            background-color: $accentTransp
+            border-radius: 10px   
+
+            .eventGridContainer
+                display: flex
+                align-items: center             
+                justify-content: center
+            
+            .date
+                height: 25px
+                padding: 5px
+                border-radius: 6px
+                background-color: white
+
+                display: flex
+                justify-content: center
+                align-items: center
+

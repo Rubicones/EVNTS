@@ -7,15 +7,13 @@ import { Inter } from "next/font/google";
 import { useSelector } from "react-redux";
 import ChevronLeftIcon from '@gravity-ui/icons/svgs/chevron-left.svg';
 import ChevronRightIcon from '@gravity-ui/icons/svgs/chevron-right.svg';
-
-const interLight = Inter({ subsets: ["latin"], weight: "300" });
-const interBold = Inter({ subsets: ["latin"], weight: "500" });
+import { Text } from "@gravity-ui/uikit";
 
 const CalendarDay = ({ date, hasEvent, highlighted }) => {
     return (
         <div className={styles.calendarDay} style={date.isSame(highlighted, "day")? {border: "#674AE9 2px solid"} : {}}>
-            <span className={styles.date}>{date.date()}</span>
-            <div className={styles.calendarEventIndicator} style={hasEvent ? {backgroundColor: "#674AE9"} : {}}></div>
+            <Text variant="body-2">{date.date()}</Text>
+            <div className={styles.calendarEventIndicator} style={hasEvent ? {backgroundColor: "#674AE9"} : {}}/>
         </div>
     );
 };
@@ -46,15 +44,8 @@ export default function CalendarWrapper() {
     return (
         <div className={styles.calendarWrapper}>
             <div className={styles.calendarNavbar}>
-                <span
-                    className={`${styles.calendarTitle} ${interBold.className}`}
-                >
-                    Events Calendar
-                </span>
-                <span className={`${styles.calendarMonth} ${interLight.className}`}>
-                    {payload.format("MMMM")}
-                </span>
-
+                <Text variant="header-1">Events Calendar</Text>
+                <Text variant="body-2" className={`${styles.calendarMonth}`}>{payload.format("MMMM")}</Text>
                 <div className={styles.navButtons}>
                     <Image
                         src={ChevronLeftIcon}
