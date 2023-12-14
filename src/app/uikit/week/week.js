@@ -4,9 +4,10 @@ import dayjs from "dayjs";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Inter } from "next/font/google";
-import arrow from "../../../../public/arrow.svg";
 import Image from "next/image";
 import {v4 as uuidv4} from 'uuid';
+import ChevronLeftIcon from '@gravity-ui/icons/svgs/chevron-left.svg';
+import ChevronRightIcon from '@gravity-ui/icons/svgs/chevron-right.svg';
 
 const interLight = Inter({ subsets: ["latin"], weight: "300" });
 const interSemiBold = Inter({ subsets: ["latin"], weight: "400" });
@@ -32,14 +33,14 @@ const WeekEvent = ({ title, location, cost }) => {
     );
 };
 
-function Week({ startingDay }) {
+function Week({ payload }) {
     const [weekDays, setWeekDays] = useState([]);
-    let events = useSelector((state) => state.events);
+    const events = useSelector((state) => state.events);
 
     useEffect(() => {
         const today = dayjs();
-        const currentDayOfWeek = startingDay.day();
-        const monday = startingDay.subtract(currentDayOfWeek - 1, "day");
+        const currentDayOfWeek = payload.day();
+        const monday = payload.subtract(currentDayOfWeek - 1, "day");
 
         const daysOfWeek = [];
 
@@ -89,31 +90,31 @@ function Week({ startingDay }) {
         }
 
         setWeekDays(daysOfWeek);
-    }, [startingDay, events]);
+    }, [payload, events]);
 
     return <div className={styles.weekContainer}>{weekDays}</div>;
 }
 
 const WeekWrapper = () => {
-    const [startingDay, setStartingDay] = useState(dayjs());
+    const [payload, setPayload] = useState(dayjs());
 
     return (
         <div className={styles.weekWrapper}>
             <div className={styles.navigation}>
                 <Image
-                    src={arrow}
+                    src={ChevronLeftIcon}
                     alt="Week Back"
                     className={styles.arrow}
-                    onClick={() => setStartingDay((o) => o.add(-7, "day"))}
+                    onClick={() => setPayload((o) => o.add(-7, "day"))}
                 />
                 <Image
-                    src={arrow}
+                    src={ChevronRightIcon}
                     alt="Week Forth"
-                    className={`${styles.arrow} ${styles.arrowFlipped}`}
-                    onClick={() => setStartingDay((o) => o.add(7, "day"))}
+                    className={`${styles.arrow}`}
+                    onClick={() => setPayload((o) => o.add(7, "day"))}
                 />
             </div>
-            <Week startingDay={startingDay} />
+            <Week payload={payload} />
         </div>
     );
 };
