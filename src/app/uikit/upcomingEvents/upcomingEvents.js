@@ -1,16 +1,26 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "./upcomingEvents.module.sass";
 import { useSelector } from "react-redux";
 import { TextInput, Text, Select } from "@gravity-ui/uikit";
 import { ThemeProvider } from "@gravity-ui/uikit";
+import dayjs from "dayjs";
+import { Over_the_Rainbow } from "next/font/google";
 
+const EventSmallCard = ({ info, title, location, isPast, isFirstUpcoming }) => {
+    const container = useRef(null);
+    useEffect(() => {
+        if (isFirstUpcoming) container.current.scrollIntoView(true);
+    }, [isFirstUpcoming]);
 
-const EventSmallCard = ({ info, title, location }) => {
     return (
-        <div className={styles.smallEventContainer}>
+        <div
+            ref={container}
+            className={styles.smallEventContainer}
+            style={isPast ? { backgroundColor: "#a0a0a068" } : {}}
+        >
             <div className={styles.eventGridContainer}>
                 <div className={styles.date}>
-                    <Text variant="body-2">{info.datesRange}</Text>
+                    <Text variant="subheader-1">{info.datesRange}</Text>
                 </div>
             </div>
             <div className={styles.eventGridContainer}>
@@ -27,11 +37,53 @@ const EventSmallCard = ({ info, title, location }) => {
 
 export default function UpcomingEvents() {
     const [cards, setCards] = useState([]);
+    const [locations, setLocations] = useState({})
+    const [currLocation, setCurrLocation] = useState(undefined)
     const [rowEvents, setRowEvents] = useState({});
+    const [rowEventsFiltered, setRowEventsFiltered] = useState({});
+    const [query, setQuery] = useState("")
     const events = useSelector((state) => state.events);
 
+    const sortEvents = (eventsArr) => {
+        let sortedEntries = Object.entries(eventsArr).sort(
+            (a, b) => dayjs(a[0], "MM/DD/YYYY") - dayjs(b[0], "MM/DD/YYYY")
+        );
+        const sortedEvents = sortedEntries.reduce((acc, [key, value]) => {
+            acc[key] = value;
+            return acc;
+        }, {});
+
+        return sortedEvents;
+    };
+
     useEffect(() => {
-        for (let [_, val] of Object.entries(rowEvents)) {
+        setRowEventsFiltered(
+            Object.keys(rowEvents)
+            .filter(
+                (key) =>
+                    rowEvents[key].title.toLowerCase().includes(query.toLowerCase()) &&
+                    (currLocation === undefined || rowEvents[key].location === currLocation)
+            )            .reduce((result, key) => {
+              result[key] = rowEvents[key];
+              return result;
+            }, {})
+        )
+    }, [query, currLocation])
+
+    useEffect(() => {
+        setCards([])
+        setLocations({})
+        let eventsArr = Object.entries(rowEventsFiltered);
+        eventsArr.forEach((ev, i) => {
+            let val = ev[1];
+            let isFirstUpcoming =
+                (i == 0 ||
+                    dayjs(
+                        eventsArr[i - 1][1].date_start,
+                        "MM/DD/YYYY"
+                    ).isBefore(dayjs())) &&
+                dayjs(val.date_start, "MM/DD/YYYY").isAfter(dayjs());
+
             setCards((o) => [
                 ...o,
                 <EventSmallCard
@@ -39,14 +91,22 @@ export default function UpcomingEvents() {
                     info={val}
                     title={val.title}
                     location={val.location}
+                    isPast={dayjs(val.date_start, "MM/DD/YYYY").isBefore(
+                        dayjs()
+                    )}
+                    isFirstUpcoming={isFirstUpcoming}
                 />,
             ]);
-        }
-    }, [rowEvents]);
+            if (locations[val.location] === undefined){
+                    setLocations(o => ({...o, [val.location]: val.info}))
+            }
+        });
+    }, [rowEventsFiltered]);
 
     useEffect(() => {
         let newCards = {};
-        for (let [_, value] of Object.entries(events)) {
+        let sortedEvents = sortEvents(events);
+        for (let [_, value] of Object.entries(sortedEvents)) {
             value.forEach((val) => {
                 if (
                     newCards[val.id] === undefined &&
@@ -56,6 +116,7 @@ export default function UpcomingEvents() {
             });
         }
 
+        setRowEventsFiltered(newCards);
         setRowEvents(newCards);
     }, [events]);
 
@@ -68,21 +129,20 @@ export default function UpcomingEvents() {
                         className={styles.navSearch}
                         placeholder="Start typing..."
                         size="m"
+                        onChange={(e) => setQuery(e.target.value)}
+                        value={query}
+                        pin="round-brick"
                     />
                     <Select
                         className={styles.navDropdown}
                         placeholder="Locations"
+                        hasClear="true"
+                        filterable={true}
+                        popupWidth='fit'
+                        pin="brick-round"
+                        onUpdate={(value) => setCurrLocation(value[0])}
                     >
-                        <Select.Option
-                            value="val_1"
-                            onClick={() => {
-                                console.log(2);
-                            }}
-                        >
-                            Abcde
-                        </Select.Option>
-                        <Select.Option value="val_1">Abcde</Select.Option>
-                        <Select.Option value="val_1">Abcde</Select.Option>
+                        {Object.entries(locations).map((location, i) => <Select.Option key={i} value={location[0]}><Text variant="body-1">{location[0]}</Text></Select.Option>)}
                     </Select>
                 </div>
 
