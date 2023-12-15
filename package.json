@@ -21,6 +21,7 @@
     "uuidv4": "^6.2.13"
   },
   "devDependencies": {
+    "@gravity-ui/app-builder": "^0.8.3",
     "@gravity-ui/uikit": "^5.25.0",
     "eslint": "^8",
     "eslint-config-next": "14.0.3"

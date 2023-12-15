@@ -10,6 +10,9 @@ import dayjs from "dayjs";
 import UpcomingEvents from "./uikit/upcomingEvents/upcomingEvents";
 import { ThemeProvider } from "@gravity-ui/uikit";
 import { fromString } from "uuidv4";
+import '@gravity-ui/uikit/styles/fonts.css'
+import '@gravity-ui/uikit/styles/styles.css'
+
 const GET_EVENTS = "https://events.vortex.foundation/events";
 
 export default function Home() {

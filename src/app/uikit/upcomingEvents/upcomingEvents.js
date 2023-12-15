@@ -1,12 +1,9 @@
 import { useEffect, useState } from "react";
-import arrow from "../../../../public/arrow.svg";
-import dayjs from "dayjs";
 import styles from "./upcomingEvents.module.sass";
-import Image from "next/image";
-import { v4 as uuidv4 } from "uuid";
-import { Inter } from "next/font/google";
 import { useSelector } from "react-redux";
 import { TextInput, Text, Select } from "@gravity-ui/uikit";
+import { ThemeProvider } from "@gravity-ui/uikit";
+
 
 const EventSmallCard = ({ info, title, location }) => {
     return (
@@ -63,22 +60,34 @@ export default function UpcomingEvents() {
     }, [events]);
 
     return (
-        <div className={styles.upcomingWrapper}>
-            <Text variant="header-2">Upcoming Events</Text>
-            <div className={styles.upcomingNavbar}>
-                <TextInput
-                    className={styles.navSearch}
-                    placeholder="Start typing..."
-                    size="m"
-                />
-                <Select className={styles.navDropdown} placeholder="Locations">
-                    <Select.Option value="val_1" onClick={() => {console.log(2)}}>Abcde</Select.Option>
-                    <Select.Option value="val_1">Abcde</Select.Option>
-                    <Select.Option value="val_1">Abcde</Select.Option>
-                </Select>
-            </div>
+        <ThemeProvider theme="light">
+            <div className={styles.upcomingWrapper}>
+                <Text variant="header-2">Upcoming Events</Text>
+                <div className={styles.upcomingNavbar}>
+                    <TextInput
+                        className={styles.navSearch}
+                        placeholder="Start typing..."
+                        size="m"
+                    />
+                    <Select
+                        className={styles.navDropdown}
+                        placeholder="Locations"
+                    >
+                        <Select.Option
+                            value="val_1"
+                            onClick={() => {
+                                console.log(2);
+                            }}
+                        >
+                            Abcde
+                        </Select.Option>
+                        <Select.Option value="val_1">Abcde</Select.Option>
+                        <Select.Option value="val_1">Abcde</Select.Option>
+                    </Select>
+                </div>
 
-            <div className={styles.eventsContainer}>{cards}</div>
-        </div>
+                <div className={styles.eventsContainer}>{cards}</div>
+            </div>
+        </ThemeProvider>
     );
 }
