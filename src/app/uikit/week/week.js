@@ -33,7 +33,7 @@ const WeekEvent = ({ title, location, cost }) => {
 
 function Week({ payload }) {
     const [weekDays, setWeekDays] = useState([]);
-    const events = useSelector((state) => state.events);
+    const events = useSelector(state => state.events);
 
     useEffect(() => {
         const today = dayjs();
@@ -95,6 +95,12 @@ function Week({ payload }) {
 
 const WeekWrapper = () => {
     const [payload, setPayload] = useState(dayjs());
+    const selectedEvent = useSelector(state => state.selectedEvent)
+
+    useEffect(() => {
+        if (selectedEvent)
+            setPayload(dayjs(selectedEvent.date_start, "MM/DD/YYYY"))
+    }, [selectedEvent])
 
     return (
         <div className={styles.weekWrapper}>

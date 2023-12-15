@@ -5,9 +5,16 @@ import { TextInput, Text, Select } from "@gravity-ui/uikit";
 import { ThemeProvider } from "@gravity-ui/uikit";
 import dayjs from "dayjs";
 import { Over_the_Rainbow } from "next/font/google";
+import { useDispatch } from "react-redux";
 
 const EventSmallCard = ({ info, title, location, isPast, isFirstUpcoming }) => {
     const container = useRef(null);
+    const dispatch = useDispatch()
+
+    const selectEvent = () => {
+        dispatch({type: "SELECT", payload: info})
+    }
+
     useEffect(() => {
         if (isFirstUpcoming) container.current.scrollIntoView(true);
     }, [isFirstUpcoming]);
@@ -17,6 +24,7 @@ const EventSmallCard = ({ info, title, location, isPast, isFirstUpcoming }) => {
             ref={container}
             className={styles.smallEventContainer}
             style={isPast ? { backgroundColor: "#a0a0a068" } : {}}
+            onClick={selectEvent}
         >
             <div className={styles.eventGridContainer}>
                 <div className={styles.date}>
@@ -43,6 +51,7 @@ export default function UpcomingEvents() {
     const [rowEventsFiltered, setRowEventsFiltered] = useState({});
     const [query, setQuery] = useState("")
     const events = useSelector((state) => state.events);
+    
 
     const sortEvents = (eventsArr) => {
         let sortedEntries = Object.entries(eventsArr).sort(
@@ -122,7 +131,7 @@ export default function UpcomingEvents() {
 
     return (
         <ThemeProvider theme="light">
-            <div className={styles.upcomingWrapper}>
+            <div className={styles.upcomingWrapper} >
                 <Text variant="header-2">Upcoming Events</Text>
                 <div className={styles.upcomingNavbar}>
                     <TextInput
@@ -146,7 +155,9 @@ export default function UpcomingEvents() {
                     </Select>
                 </div>
 
-                <div className={styles.eventsContainer}>{cards}</div>
+                <div className={styles.eventsContainer}>
+                    {cards}
+                </div>
             </div>
         </ThemeProvider>
     );

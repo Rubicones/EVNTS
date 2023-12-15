@@ -41,6 +41,13 @@ const Calendar = ({ payload }) => {
 
 export default function CalendarWrapper() {
     const [payload, setPayload] = useState(dayjs());
+    const selectedEvent = useSelector(state => state.selectedEvent)
+
+    useEffect(() => {
+        if (selectedEvent)
+            setPayload(dayjs(selectedEvent.date_start, "MM/DD/YYYY"))
+    }, [selectedEvent])
+    
     return (
         <div className={styles.calendarWrapper}>
             <div className={styles.calendarNavbar}>

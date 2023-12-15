@@ -1,14 +1,13 @@
 "use client";
-import Image from "next/image";
 import styles from "./page.module.sass";
 import WeekWrapper from "./uikit/week/week";
 import CalendarWrapper from "./uikit/calendar/calendar";
 import store from "@/store/";
-import { Provider, useDispatch } from "react-redux";
+import { Provider } from "react-redux";
 import { useEffect } from "react";
 import dayjs from "dayjs";
 import UpcomingEvents from "./uikit/upcomingEvents/upcomingEvents";
-import { ThemeProvider } from "@gravity-ui/uikit";
+import { ThemeProvider, Text } from "@gravity-ui/uikit";
 import { fromString } from "uuidv4";
 import "@gravity-ui/uikit/styles/fonts.css";
 import "@gravity-ui/uikit/styles/styles.css";
@@ -20,7 +19,6 @@ export default function Home() {
         fetch(GET_EVENTS)
             .then((res) => res.json())
             .then((eventsArr) => {
-                
                 eventsArr.data.forEach((ev) => {
                     let id = fromString(JSON.stringify(ev));
                     let dateConstructor = "";
@@ -69,9 +67,18 @@ export default function Home() {
     return (
         <ThemeProvider theme="light">
             <Provider store={store}>
-                <WeekWrapper />
-                <CalendarWrapper />
-                <UpcomingEvents />
+                <div className={styles.pageContainer}>
+                    <div className={styles.content}>
+                        <main className={styles.main}>
+                            <Text variant="display-3">EVNTS</Text>
+                            <WeekWrapper />
+                        </main>
+                        <aside>
+                            <CalendarWrapper />
+                            <UpcomingEvents />
+                        </aside>
+                    </div>
+                </div>
             </Provider>
         </ThemeProvider>
     );
