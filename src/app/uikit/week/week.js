@@ -37,8 +37,11 @@ function Week({ payload }) {
 
     useEffect(() => {
         const today = dayjs();
-        const currentDayOfWeek = payload.day();
-        const monday = payload.subtract(currentDayOfWeek - 1, "day");
+        let currentDayOfWeek = payload;
+        while (currentDayOfWeek.day() !== 1)
+            currentDayOfWeek = currentDayOfWeek.add(-1, "day")
+        const monday = currentDayOfWeek
+
 
         const daysOfWeek = [];
 
@@ -99,7 +102,7 @@ const WeekWrapper = () => {
 
     useEffect(() => {
         if (selectedEvent)
-            setPayload(dayjs(selectedEvent.date_start, "MM/DD/YYYY"))
+            setPayload(dayjs(selectedEvent, "MM/DD/YYYY"))
     }, [selectedEvent])
 
     return (

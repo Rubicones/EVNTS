@@ -3,15 +3,20 @@ import dayjs from "dayjs";
 import styles from "./calendar.module.sass";
 import Image from "next/image";
 import { v4 as uuidv4 } from "uuid";
-import { Inter } from "next/font/google";
 import { useSelector } from "react-redux";
 import ChevronLeftIcon from '@gravity-ui/icons/svgs/chevron-left.svg';
 import ChevronRightIcon from '@gravity-ui/icons/svgs/chevron-right.svg';
 import { Text } from "@gravity-ui/uikit";
+import { useDispatch } from "react-redux";
 
 const CalendarDay = ({ date, hasEvent, highlighted }) => {
+    const dispatch = useDispatch()
+
+    const selectEvent = () => {
+        dispatch({type: "SELECT", payload: date.format("MM/DD/YYYY")})
+    }
     return (
-        <div className={styles.calendarDay} style={date.isSame(highlighted, "day")? {border: "#674AE9 2px solid"} : {}}>
+        <div className={styles.calendarDay} onClick={selectEvent} style={date.isSame(highlighted, "day")? {border: "#674AE9 2px solid"} : {}}>
             <Text variant="body-2">{date.date()}</Text>
             <div className={styles.calendarEventIndicator} style={hasEvent ? {backgroundColor: "#674AE9"} : {}}/>
         </div>
@@ -45,7 +50,7 @@ export default function CalendarWrapper() {
 
     useEffect(() => {
         if (selectedEvent)
-            setPayload(dayjs(selectedEvent.date_start, "MM/DD/YYYY"))
+            setPayload(dayjs(selectedEvent, "MM/DD/YYYY"))
     }, [selectedEvent])
     
     return (

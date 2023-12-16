@@ -68,9 +68,9 @@ export default function Home() {
         <ThemeProvider theme="light">
             <Provider store={store}>
                 <div className={styles.pageContainer}>
+                    <Text className={styles.title} variant="display-3">EVNTS</Text>
                     <div className={styles.content}>
                         <main className={styles.main}>
-                            <Text variant="display-3">EVNTS</Text>
                             <WeekWrapper />
                         </main>
                         <aside>

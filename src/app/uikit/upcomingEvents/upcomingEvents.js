@@ -12,7 +12,7 @@ const EventSmallCard = ({ info, title, location, isPast, isFirstUpcoming }) => {
     const dispatch = useDispatch()
 
     const selectEvent = () => {
-        dispatch({type: "SELECT", payload: info})
+        dispatch({type: "SELECT", payload: info.date_start})
     }
 
     useEffect(() => {
