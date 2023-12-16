@@ -18,6 +18,7 @@
     border-radius: 10px
 
     box-shadow: 0px 0px 30px 30px #eeeeee
+    z-index: 3
 
     .close
         position: absolute
@@ -57,4 +58,15 @@
     .eventCardWrapper
         position: fixed
         bottom: 10vh
+
+@media only screen and (max-width: 1000px)
+    .eventCardWrapper
+        position: absolute
+        display: flex
+        flex-direction: column
+        gap: 30px
+        top: 30%
+        left: 5%
+        width: 90%
+        height: auto
 
