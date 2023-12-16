@@ -13,7 +13,7 @@ const CalendarDay = ({ date, hasEvent, highlighted }) => {
     const dispatch = useDispatch()
 
     const selectEvent = () => {
-        dispatch({type: "SELECT", payload: date.format("MM/DD/YYYY")})
+        dispatch({type: "SELECT_DATE", payload: date.format("MM/DD/YYYY")})
     }
     return (
         <div className={styles.calendarDay} onClick={selectEvent} style={date.isSame(highlighted, "day")? {border: "#674AE9 2px solid"} : {}}>
@@ -26,6 +26,7 @@ const CalendarDay = ({ date, hasEvent, highlighted }) => {
 const Calendar = ({ payload }) => {
     const [days, setDays] = useState([]);
     const events = useSelector((state) => state.events);
+    const selected = useSelector(state => state.selectedDate)
 
     useEffect(() => {
         let firstDayOfMonth = payload.startOf("month");
@@ -34,7 +35,7 @@ const Calendar = ({ payload }) => {
 
         while (!firstDayOfMonth.add(-1, 'day').isSame(lastDayOfMonth, "day")) {
             daysOfMonth.push(
-                <CalendarDay highlighted={dayjs()} key={uuidv4()} date={firstDayOfMonth} hasEvent={events[firstDayOfMonth.format("MM/DD/YYYY")] !== undefined} />
+                <CalendarDay highlighted={dayjs(selected, "MM/DD/YYYY")} key={uuidv4()} date={firstDayOfMonth} hasEvent={events[firstDayOfMonth.format("MM/DD/YYYY")] !== undefined} />
             );
             firstDayOfMonth = firstDayOfMonth.add(1, "day");
         }
@@ -46,12 +47,12 @@ const Calendar = ({ payload }) => {
 
 export default function CalendarWrapper() {
     const [payload, setPayload] = useState(dayjs());
-    const selectedEvent = useSelector(state => state.selectedEvent)
+    const selectedDate = useSelector(state => state.selectedDate)
 
     useEffect(() => {
-        if (selectedEvent)
-            setPayload(dayjs(selectedEvent, "MM/DD/YYYY"))
-    }, [selectedEvent])
+        if (selectedDate)
+            setPayload(dayjs(selectedDate, "MM/DD/YYYY"))
+    }, [selectedDate])
     
     return (
         <div className={styles.calendarWrapper}>

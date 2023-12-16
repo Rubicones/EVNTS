@@ -34,9 +34,8 @@ const WeekEvent = ({ title, location, cost }) => {
 function Week({ payload }) {
     const [weekDays, setWeekDays] = useState([]);
     const events = useSelector(state => state.events);
-
+    const selected = useSelector(state => state.selectedDate)
     useEffect(() => {
-        const today = dayjs();
         let currentDayOfWeek = payload;
         while (currentDayOfWeek.day() !== 1)
             currentDayOfWeek = currentDayOfWeek.add(-1, "day")
@@ -54,7 +53,7 @@ function Week({ payload }) {
                     className={styles.weekDayContainer}
                     key={daysOfWeek.length}
                 >
-                    {day.isSame(today, "day") ? (
+                    {day.isSame(dayjs(selected, "MM/DD/YYYY"), "day") ? (
                         <div className={styles.todayWrapper}>
                             <Text
                                 variant="body-3"
@@ -69,9 +68,9 @@ function Week({ payload }) {
                     <div
                         className={styles.weekDay}
                         style={
-                            day.isSame(today, "day")
+                            day.isSame(dayjs(selected, "MM/DD/YYYY"), "day")
                                 ? {
-                                      transform: "translateY(-5.5px)",
+                                      transform: "translateY(-4.5px)",
                                   }
                                 : {}
                         }
@@ -98,12 +97,12 @@ function Week({ payload }) {
 
 const WeekWrapper = () => {
     const [payload, setPayload] = useState(dayjs());
-    const selectedEvent = useSelector(state => state.selectedEvent)
+    const selectedDate = useSelector(state => state.selectedDate)
 
     useEffect(() => {
-        if (selectedEvent)
-            setPayload(dayjs(selectedEvent, "MM/DD/YYYY"))
-    }, [selectedEvent])
+        if (selectedDate)
+            setPayload(dayjs(selectedDate, "MM/DD/YYYY"))
+    }, [selectedDate])
 
     return (
         <div className={styles.weekWrapper}>

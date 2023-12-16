@@ -21,7 +21,10 @@
 
         main
             padding-top: 10%
-            width: 90%
+            width: 100%
+            height: calc(100vh - 5%)
+            max-height: 100vh
+            container-type: size
         aside
             height: calc(100vh - 5%)
             max-height: 100vh
@@ -35,20 +38,19 @@
     .pageContainer
         .title
             position: relative
-            // width: 100%
-            // top: 5%
-            // left: 5%
+
         .content
             flex-direction: column
-            // align-items: center 
 
 @media only screen and (max-width: 530px)
     .pageContainer
         height: auto
+
         .content
             flex-direction: column-reverse
             height: auto
             max-height: unset
+            align-items: center
 
             aside
                 height: auto
