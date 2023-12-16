@@ -24,57 +24,60 @@ export default function Content() {
             .then((res) => res.json())
             .then((eventsArr) => {
                 // for (let i = 0; i < 4; i++) {
-                    eventsArr.data.forEach((ev) => {
-                        let id = fromString(JSON.stringify(ev));
-                        let dateConstructor = "";
-                        let s = dayjs(ev.date_start, "MM/DD/YYYY");
-                        let e = dayjs(ev.date_end, "MM/DD/YYYY");
-                        let sMonth = s.format("MMMM") + "";
-                        sMonth = sMonth.slice(0, 3);
+                eventsArr.data.forEach((ev) => {
+                    let id = fromString(JSON.stringify(ev));
+                    let dateConstructor = "";
+                    let s = dayjs(ev.date_start, "MM/DD/YYYY");
+                    let e = dayjs(ev.date_end, "MM/DD/YYYY");
+                    let sMonth = s.format("MMMM") + "";
+                    sMonth = sMonth.slice(0, 3);
 
-                        if (e) dateConstructor = `${s.date()}–${e.date()}`;
-                        else dateConstructor = `${s.date()}}`;
+                    if (e) dateConstructor = `${s.date()}–${e.date()}`;
+                    else dateConstructor = `${s.date()}}`;
 
-                        dateConstructor += ` ${sMonth}`;
-                        dateConstructor += ` ${s.year()}`;
+                    dateConstructor += ` ${sMonth}`;
+                    dateConstructor += ` ${s.year()}`;
 
-                        dispatch({
-                            type: "ADD",
-                            payload: {
-                                date: ev.date_start,
-                                info: {
-                                    ...ev,
-                                    id: id,
-                                    datesRange: dateConstructor,
-                                },
+                    dispatch({
+                        type: "ADD",
+                        payload: {
+                            date: ev.date_start,
+                            info: {
+                                ...ev,
+                                id: id,
+                                datesRange: dateConstructor,
                             },
-                        });
-
-                        if (ev.date_end) {
-                            let start = dayjs(ev.date_start, "MM/DD/YYYY");
-                            let end = dayjs(ev.date_end, "MM/DD/YYYY");
-
-                            while (!start.isSame(end, "day")) {
-                                start = start.add(1, "day");
-                                dispatch({
-                                    type: "ADD",
-                                    payload: {
-                                        date: start.format("MM/DD/YYYY"),
-                                        info: { ...ev, id: id },
-                                    },
-                                });
-                            }
-                        }
+                        },
                     });
+
+                    if (ev.date_end) {
+                        let start = dayjs(ev.date_start, "MM/DD/YYYY");
+                        let end = dayjs(ev.date_end, "MM/DD/YYYY");
+
+                        while (!start.isSame(end, "day")) {
+                            start = start.add(1, "day");
+                            dispatch({
+                                type: "ADD",
+                                payload: {
+                                    date: start.format("MM/DD/YYYY"),
+                                    info: { ...ev, id: id },
+                                },
+                            });
+                        }
+                    }
+                });
                 // }
             });
     }, []);
 
     return (
         <div className={styles.pageContainer}>
-            <Text className={styles.title} variant="display-3">
-                EVNTS
-            </Text>
+            <div className={styles.title}>
+                <Text className={styles.titleText} variant="display-3">
+                    EVNTS
+                </Text>
+            </div>
+
             <div className={styles.content}>
                 <main className={styles.main}>
                     <WeekWrapper />

@@ -2,7 +2,7 @@
     width: 100vw
     height: 100vh
 
-    .title
+    .titleText
         position: absolute
         top: 5%
         left: 5%
@@ -37,7 +37,13 @@
 @media only screen and (max-width: 1000px)
     .pageContainer
         .title
+            padding-left: 5%
+
+        .titleText
             position: relative
+            width: 100%
+            top: unset
+            left: unset
 
         .content
             flex-direction: column
@@ -51,6 +57,11 @@
 @media only screen and (max-width: 530px)
     .pageContainer
         height: auto
+
+        .title
+            padding-bottom: 10%
+            width: 100%
+            text-align: center
 
         .content
             flex-direction: column-reverse

@@ -17,7 +17,7 @@ export default function EventCard() {
 
     return (
         <div className={styles.eventCardWrapper}>
-            <Image src={XmarkIcon} alt="close event card" width={15} height={15} className={styles.close} onClick={() => dispatch({type: "SELECT_EVENT", payload: null})}/>
+            <Image src={XmarkIcon} alt="close event card" width={25} height={25} className={styles.close} onClick={() => dispatch({type: "SELECT_EVENT", payload: null})}/>
             <div className={styles.date}>
                 <Text variant="subheader-3">{eventInfo.datesRange}</Text>
             </div>
