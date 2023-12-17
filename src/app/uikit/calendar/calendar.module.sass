@@ -25,19 +25,21 @@ $accentTransp: #674ae950
             margin-left: 20px
 
             transform: translateY(2px)
-            z-index: 1
 
+            z-index: 1
             float: left
 
         .navButtons
             display: flex
             gap: 5px
+
             margin-left: auto
             padding-right: 5px
 
             .arrow
                 width: 20px
                 height: 20px
+
                 cursor: pointer
 
     .daysTable
@@ -63,9 +65,13 @@ $accentTransp: #674ae950
 
             padding: 4px
 
+            &>span
+                user-select: none
+
             .calendarEventIndicator
                 width: 4px
                 height: 4px
+
                 border-radius: 50%
 
 @media only screen and (max-width: 530px)
@@ -75,4 +81,5 @@ $accentTransp: #674ae950
             .arrow
                 width: 30px
                 height: 30px
+
                 cursor: pointer

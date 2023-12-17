@@ -4,20 +4,23 @@ $accentTransp: #674ae950
 .upcomingWrapper
     display: flex
     flex-direction: column
+
     width: 350px
     height: calc(100vh - 350px)
-    margin-top: 20px
 
+    margin-top: 20px
 
     .upcomingHeader
         font-size: 25px
 
     .upcomingNavbar
         width: 100%
+
         margin-top: 20px
 
         display: flex
         gap: 1%
+
         .navSearch
             width: 64%
 
@@ -28,7 +31,9 @@ $accentTransp: #674ae950
         display: flex
         height: 100%
         max-height: 100%
+
         margin-top: 10px
+
         overflow: scroll
 
         flex-direction: column
@@ -49,20 +54,27 @@ $accentTransp: #674ae950
             gap: 3%
 
             background-color: $accentTransp
-            border-radius: 10px   
+            border-radius: 10px                   
 
             .eventGridContainer
                 display: flex
                 align-items: center             
                 justify-content: center
+
+                &>span
+                    user-select: none
             
             .date
                 height: 40px
+
                 padding: 5px
+
                 border-radius: 6px
                 background-color: white
 
                 display: flex
                 justify-content: center
                 align-items: center
+
+                user-select: none
 

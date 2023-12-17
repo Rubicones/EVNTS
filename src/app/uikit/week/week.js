@@ -1,14 +1,21 @@
 "use client";
-import styles from "./week.module.sass";
+
 import dayjs from "dayjs";
+
 import { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { Inter } from "next/font/google";
+
+import { useSelector } from "react-redux";
+
 import Image from "next/image";
+
 import { v4 as uuidv4 } from "uuid";
+
 import ChevronLeftIcon from "@gravity-ui/icons/svgs/chevron-left.svg";
 import ChevronRightIcon from "@gravity-ui/icons/svgs/chevron-right.svg";
 import { Text } from "@gravity-ui/uikit";
+
+import styles from "./week.module.sass";
+
 
 const WeekEvent = ({ title, location, cost }) => {
     return (

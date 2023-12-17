@@ -1,13 +1,19 @@
 import { useEffect, useState } from "react";
+
 import dayjs from "dayjs";
-import styles from "./calendar.module.sass";
+
 import Image from "next/image";
+
 import { v4 as uuidv4 } from "uuid";
-import { useSelector } from "react-redux";
+
+import { useSelector, useDispatch } from "react-redux";
+
 import ChevronLeftIcon from '@gravity-ui/icons/svgs/chevron-left.svg';
 import ChevronRightIcon from '@gravity-ui/icons/svgs/chevron-right.svg';
 import { Text } from "@gravity-ui/uikit";
-import { useDispatch } from "react-redux";
+
+import styles from "./calendar.module.sass";
+
 
 const CalendarDay = ({ date, hasEvent, highlighted }) => {
     const dispatch = useDispatch()

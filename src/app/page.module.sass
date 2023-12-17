@@ -6,10 +6,12 @@
         position: absolute
         top: 5%
         left: 5%
+
     .content
         width: 100%
         height: 100vh
         max-height: 100vh
+
         padding-top: 2.5%
         padding-left: 5%
         padding-right: 2.5%
@@ -20,11 +22,14 @@
         gap: 10%
 
         main
-            padding-top: 10%
             width: 100%
             height: calc(100vh - 5%)
             max-height: 100vh
+
+            padding-top: 10%
+            
             container-type: size
+
         aside
             height: calc(100vh - 5%)
             max-height: 100vh
@@ -33,7 +38,6 @@
             flex-direction: column
             justify-content: flex-start
 
-
 @media only screen and (max-width: 1000px)
     .pageContainer
         .title
@@ -41,18 +45,22 @@
             padding-left: 5%
 
         .titleText
-            position: relative
             width: 100%
+
+            position: relative
             top: unset
             left: unset
 
         .content
             flex-direction: column
+
             main
-                padding-top: 10%
                 width: 100%
                 height: calc(100vh - 5%)
                 max-height: 100vh
+
+                padding-top: 10%
+                
                 container-type: unset
 
 @media only screen and (max-width: 530px)
@@ -60,15 +68,18 @@
         height: auto
 
         .title
+            width: 100%
+
             padding-left: 0%
             padding-bottom: 10%
-            width: 100%
+
             text-align: center
 
         .content
-            flex-direction: column-reverse
             height: auto
             max-height: unset
+
+            flex-direction: column-reverse
             align-items: center
 
             aside

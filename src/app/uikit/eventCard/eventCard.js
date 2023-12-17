@@ -1,18 +1,22 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import styles from "./eventCard.module.sass";
-import { ThemeProvider, Text } from "@gravity-ui/uikit";
+
+import { useSelector, useDispatch } from "react-redux";
+
 import Link from "next/link";
-import XmarkIcon from "@gravity-ui/icons/svgs/xmark.svg";
 import Image from "next/image";
-import { useDispatch } from "react-redux";
+
+import XmarkIcon from "@gravity-ui/icons/svgs/xmark.svg";
+import { Text } from "@gravity-ui/uikit";
+
+import styles from "./eventCard.module.sass";
+
 export default function EventCard() {
     const [eventInfo, setEventInfo] = useState({});
     const selectedEvent = useSelector((state) => state.selectedEvent);
     const dispatch = useDispatch()
+    
     useEffect(() => {
         selectedEvent && setEventInfo(selectedEvent);
-        console.log(selectedEvent);
     }, [selectedEvent]);
 
     return (

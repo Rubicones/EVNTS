@@ -5,12 +5,15 @@ $accentTransp: #674ae950
     display: flex
     flex-direction: column    
     gap: 10px
+
     width: 100%
     max-height: calc(100% - 20px)
+
     margin-top: 20px
 
     .navigation
         min-width: calc(70px * 7)
+
         display: flex
         flex-direction: row
         justify-content: flex-end
@@ -19,6 +22,7 @@ $accentTransp: #674ae950
         .arrow
             width: 20px
             height: 20px
+
             cursor: pointer
             
         .arrowFlipped
@@ -31,6 +35,7 @@ $accentTransp: #674ae950
         width: 100%
         max-height: 100%
         overflow-y: scroll 
+
         &::-webkit-scrollbar
             display: none
 
@@ -38,21 +43,23 @@ $accentTransp: #674ae950
             display: flex
             flex-direction: column
             justify-content: flex-start
+            gap: 5px
 
             width: 100%
             height: 100%
             min-height: 200px
+
             padding-top: 10px
-            
-            gap: 5px
 
             .weekDay
+                position: relative
+
                 height: 100%
                 min-height: 200px
                 min-width: 70px
                 width: 100%
+
                 margin-top: 6px
-                position: relative
 
                 display: flex
                 flex-direction: column
@@ -62,11 +69,14 @@ $accentTransp: #674ae950
 
                 &::after
                     content: ""
+                    
                     position: absolute
                     top: 0
                     left: 0
+
                     width: 2px
                     height: 100%
+
                     border-radius: 2px
                     background: linear-gradient(180deg, #737373 0%, rgba(73, 73, 73, 0.00) 101.48%)
 
@@ -79,7 +89,6 @@ $accentTransp: #674ae950
                     border-radius: 10px
                     background-color: $accentTransp
 
-
                     display: flex
                     flex-direction: column
                     justify-content: flex-start
@@ -87,12 +96,12 @@ $accentTransp: #674ae950
 
                     transform: translateX(1px)
 
-
                     .weekEventTitle, .weekEventLocation
                         display: -webkit-box
                         -webkit-box-orient: vertical
                         -webkit-line-clamp: 2
                         overflow: hidden
+
                         margin: 0
 
                     .weekEventLocation
@@ -100,17 +109,21 @@ $accentTransp: #674ae950
 
                     .weekEventCost
                         margin-top: auto
+
                         font-size: 12px
 
 
             .todayWrapper
                 width: 60px
                 height: 25px
+
                 background-color: $accent
                 border-radius: 6px
+
                 display: flex
                 justify-content: center
                 align-items: center
+
                 transform: translateY(-2px)
 
 
@@ -120,6 +133,7 @@ $accentTransp: #674ae950
 
         .navigation
             min-width: 100%
+
             padding-right: 20px
 
             .arrow
@@ -128,6 +142,7 @@ $accentTransp: #674ae950
 
         .weekContainer
             flex-direction: column
+            
             max-height: initial
 
             .weekDayContainer

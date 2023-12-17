@@ -1,11 +1,13 @@
 import { useEffect, useRef, useState } from "react";
-import styles from "./upcomingEvents.module.sass";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+
 import { TextInput, Text, Select } from "@gravity-ui/uikit";
 import { ThemeProvider } from "@gravity-ui/uikit";
+
 import dayjs from "dayjs";
-import { Over_the_Rainbow } from "next/font/google";
-import { useDispatch } from "react-redux";
+
+import styles from "./upcomingEvents.module.sass";
+
 
 const EventSmallCard = ({ info, title, location, isPast, isFirstUpcoming }) => {
     const container = useRef(null);
