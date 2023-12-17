@@ -25,7 +25,7 @@ export default function Content() {
             .then((eventsArr) => {
                 // for (let i = 0; i < 2; i++) {
                 eventsArr.data.forEach((ev) => {
-                    let id = fromString(JSON.stringify(ev) + i);
+                    let id = fromString(JSON.stringify(ev));
                     let dateConstructor = "";
                     let s = dayjs(ev.date_start, "MM/DD/YYYY");
                     let e = dayjs(ev.date_end, "MM/DD/YYYY");
