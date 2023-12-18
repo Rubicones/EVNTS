@@ -36,7 +36,7 @@ export default function EventCard() {
                 >
                     {eventInfo.location}
                 </Text>
-                <Link href={eventInfo.url ? eventInfo.url : ""}>
+                <Link href={eventInfo.url ? "https://" + eventInfo.url : ""} passHref={true}>
                     <Text ellipsis="true" variant="body-3">
                         {eventInfo.url}
                     </Text>

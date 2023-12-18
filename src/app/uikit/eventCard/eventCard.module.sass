@@ -2,7 +2,8 @@
 // $accentTransp: #674ae950
 
 .eventCardWrapper
-    position: absolute
+    position: fixed
+    bottom: 15vh
 
     display: grid
     grid-template-columns: 20% 30% 42%
@@ -11,6 +12,7 @@
     padding: 20px
     margin-top: 100px
 
+    max-width: 1000px
     width: 100%
     min-height: 170px
     
@@ -59,11 +61,6 @@
         
 
 
-@container (height > 82vh)
-    .eventCardWrapper
-        position: fixed
-        bottom: 10vh
-
 @media only screen and (max-width: 1000px)
     .eventCardWrapper
         width: 80%
@@ -72,6 +69,8 @@
         position: absolute
         top: 30%
         left: 10%
+        bottom: unset
+
 
         display: flex
         flex-direction: column

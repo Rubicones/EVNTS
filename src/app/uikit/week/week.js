@@ -5,6 +5,7 @@ import dayjs from "dayjs";
 import { useEffect, useState } from "react";
 
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import Image from "next/image";
 
@@ -17,22 +18,28 @@ import { Text } from "@gravity-ui/uikit";
 import styles from "./week.module.sass";
 
 
-const WeekEvent = ({ title, location, cost }) => {
+const WeekEvent = ({ info }) => {
+    const dispatch = useDispatch()
+
+    const selectEvent = () => {
+        dispatch({type: "SELECT_DATE", payload: info.date_start})
+        dispatch({type: "SELECT_EVENT", payload: info})
+    }
+
     return (
-        <div className={styles.weekEventContainer}>
+        <div className={styles.weekEventContainer} onClick={selectEvent}>
             <Text variant="caption-2" className={styles.weekEventTitle}>
-                {title}
+                {info.title}
             </Text>
             <Text
                 variant="caption-1"
                 color="dark-secondary"
                 className={styles.weekEventLocation}
             >
-                {location}
+                {info.location}
             </Text>
             <Text variant="body-1" className={styles.weekEventCost}>
-                {" "}
-                {cost}
+                {info.ticket_price}
             </Text>
         </div>
     );
@@ -86,9 +93,7 @@ function Week({ payload }) {
                             eventsToday.map((ev) => (
                                 <WeekEvent
                                     key={uuidv4()}
-                                    title={ev.title}
-                                    location={ev.location}
-                                    cost={ev.ticket_price}
+                                    info={ev}
                                 />
                             ))}
                     </div>

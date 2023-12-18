@@ -29,7 +29,6 @@ export default function Content() {
         fetch(GET_EVENTS)
             .then((res) => res.json())
             .then((eventsArr) => {
-                // for (let i = 0; i < 2; i++) {
                 eventsArr.data.forEach((ev) => {
                     let id = fromString(JSON.stringify(ev));
                     let dateConstructor = "";
@@ -66,13 +65,12 @@ export default function Content() {
                                 type: "ADD",
                                 payload: {
                                     date: start.format("MM/DD/YYYY"),
-                                    info: { ...ev, id: id },
+                                    info: { ...ev, id: id, datesRange: dateConstructor },
                                 },
                             });
                         }
                     }
                 });
-                // }
             });
     }, []);
 

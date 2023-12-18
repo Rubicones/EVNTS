@@ -52,6 +52,7 @@
             left: unset
 
         .content
+            max-height: unset
             flex-direction: column
 
             main
@@ -62,6 +63,10 @@
                 padding-top: 10%
                 
                 container-type: unset
+
+            aside
+                height: calc(100vh - 5%)
+                max-height: unset
 
 @media only screen and (max-width: 530px)
     .pageContainer
@@ -84,4 +89,8 @@
 
             aside
                 height: auto
+                flex-direction: column-reverse
+                gap: 20px
+
+                
 

@@ -19,7 +19,10 @@ const EventSmallCard = ({ info, title, location, isPast, isFirstUpcoming }) => {
     }
 
     useEffect(() => {
-        if (isFirstUpcoming && !window.matchMedia("(orientation: portrait)").matches) container.current.scrollIntoView(true);
+        if (isFirstUpcoming && !window.matchMedia("(orientation: portrait)").matches) 
+            container.current.scrollIntoView(true) 
+        else if (window.matchMedia("(max-width: 530px)").matches)
+            container.current.scrollIntoView(false);
     }, [isFirstUpcoming]);
 
     return (
