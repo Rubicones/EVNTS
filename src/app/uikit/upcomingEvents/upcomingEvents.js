@@ -70,7 +70,7 @@ export default function UpcomingEvents() {
     const [rowEvents, setRowEvents] = useState({});
     const [rowEventsFiltered, setRowEventsFiltered] = useState({});
     const [query, setQuery] = useState("");
-    const [isPastShown, setIsPastShown] = useState(true);
+    const [isPastShown, setIsPastShown] = useState(false);
     const events = useSelector((state) => state.events);
 
     const sortEvents = (eventsArr) => {
@@ -190,7 +190,7 @@ export default function UpcomingEvents() {
                     </Select>
                 </div>
                 <Checkbox
-                    defaultChecked
+                    
                     size="l"
                     onChange={() => setIsPastShown((o) => !o)}
                 >
