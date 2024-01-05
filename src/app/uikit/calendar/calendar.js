@@ -8,8 +8,9 @@ import { v4 as uuidv4 } from "uuid";
 
 import { useSelector, useDispatch } from "react-redux";
 
-import ChevronLeftIcon from '@gravity-ui/icons/svgs/chevron-left.svg';
-import ChevronRightIcon from '@gravity-ui/icons/svgs/chevron-right.svg';
+import ChevronLeftIcon from '../../../../public/icons/chevron-left.svg';
+import ChevronRightIcon from '../../../../public/icons/chevron-right.svg';
+
 import { Text } from "@gravity-ui/uikit";
 
 import styles from "./calendar.module.sass";
@@ -22,9 +23,9 @@ const CalendarDay = ({ date, hasEvent, highlighted }) => {
         dispatch({type: "SELECT_DATE", payload: date.format("MM/DD/YYYY")})
     }
     return (
-        <div className={styles.calendarDay} onClick={selectEvent} style={date.isSame(highlighted, "day")? {border: "#674AE9 2px solid"} : {}}>
+        <div className={styles.calendarDay} onClick={selectEvent} style={date.isSame(highlighted, "day")? {border: "#9DFF48 2px solid"} : {}}>
             <Text variant="body-2">{date.date()}</Text>
-            <div className={styles.calendarEventIndicator} style={hasEvent ? {backgroundColor: "#674AE9"} : {}}/>
+            <div className={styles.calendarEventIndicator} style={hasEvent ? {backgroundColor: "#9DFF48"} : {}}/>
         </div>
     );
 };

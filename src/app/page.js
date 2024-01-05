@@ -13,7 +13,7 @@ import Content from "./content";
 export default function Home() {
 
     return (
-        <ThemeProvider theme="light">
+        <ThemeProvider theme="dark">
             <Provider store={store}>
                 <Content/>
             </Provider>

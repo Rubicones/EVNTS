@@ -19,6 +19,10 @@ import { fromString } from "uuidv4";
 
 import styles from "./page.module.sass";
 
+import localFont from 'next/font/local';
+
+
+const vortexFont = localFont({ src: '../../public/fonts/Vortex-Mix.otf' })
 
 const GET_EVENTS = "https://events.vortex.foundation/events";
 
@@ -75,10 +79,10 @@ export default function Content() {
     }, []);
 
     return (
-        <div className={styles.pageContainer}>
+        <div className={`${styles.pageContainer}`}>
             <div className={styles.title}>
-                <Text className={styles.titleText} variant="display-3">
-                    EVNTS
+                <Text className={`${styles.titleText} ${vortexFont.className}`} variant="display-3">
+                    evnts
                 </Text>
             </div>
 

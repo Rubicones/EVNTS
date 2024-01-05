@@ -8,6 +8,10 @@ import dayjs from "dayjs";
 
 import styles from "./upcomingEvents.module.sass";
 
+import localFont from 'next/font/local';
+
+
+const vortexFont = localFont({ src: '../../../../public/fonts/Vortex-Mix.otf' })
 
 const EventSmallCard = ({ info, title, location, isPast, isFirstUpcoming }) => {
     const container = useRef(null);
@@ -21,7 +25,7 @@ const EventSmallCard = ({ info, title, location, isPast, isFirstUpcoming }) => {
     useEffect(() => {
         if (isFirstUpcoming && !window.matchMedia("(orientation: portrait)").matches) 
             container.current.scrollIntoView(true) 
-        else if (window.matchMedia("(max-width: 530px)").matches)
+        else if (isFirstUpcoming && window.matchMedia("(max-width: 530px)").matches)
             container.current.scrollIntoView(false);
     }, [isFirstUpcoming]);
 
@@ -29,19 +33,19 @@ const EventSmallCard = ({ info, title, location, isPast, isFirstUpcoming }) => {
         <div
             ref={container}
             className={styles.smallEventContainer}
-            style={isPast ? { backgroundColor: "#a0a0a068" } : {}}
+            style={isPast ? { borderColor: "#747474" } : {}}
             onClick={selectEvent}
         >
             <div className={styles.eventGridContainer}>
                 <div className={styles.date}>
-                    <Text variant="subheader-1">{info.datesRange}</Text>
+                    <Text variant="subheader-1" color="dark-primary">{info.datesRange}</Text>
                 </div>
             </div>
             <div className={styles.eventGridContainer}>
                 <Text variant="body-2">{title}</Text>
             </div>
             <div className={styles.eventGridContainer}>
-                <Text variant="body-1" color="dark-secondary">
+                <Text variant="body-1" color="light-secondary">
                     {location}
                 </Text>
             </div>
@@ -138,7 +142,7 @@ export default function UpcomingEvents() {
     return (
         <ThemeProvider theme="light">
             <div className={styles.upcomingWrapper} >
-                <Text variant="header-2">Upcoming Events</Text>
+                <Text variant="header-2" className={`${vortexFont.className}`}>Upcoming Events</Text>
                 <div className={styles.upcomingNavbar}>
                     <TextInput
                         className={styles.navSearch}

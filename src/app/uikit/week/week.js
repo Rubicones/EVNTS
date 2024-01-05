@@ -11,8 +11,9 @@ import Image from "next/image";
 
 import { v4 as uuidv4 } from "uuid";
 
-import ChevronLeftIcon from "@gravity-ui/icons/svgs/chevron-left.svg";
-import ChevronRightIcon from "@gravity-ui/icons/svgs/chevron-right.svg";
+import ChevronLeftIcon from '../../../../public/icons/chevron-left.svg';
+import ChevronRightIcon from '../../../../public/icons/chevron-right.svg';
+
 import { Text } from "@gravity-ui/uikit";
 
 import styles from "./week.module.sass";
@@ -71,7 +72,7 @@ function Week({ payload }) {
                         <div className={styles.todayWrapper}>
                             <Text
                                 variant="body-3"
-                                style={{ color: "white" }}
+                                color="dark-primary"
                             >{`${day.date()} ${monthName.slice(0, 3)}`}</Text>
                         </div>
                     ) : (
