@@ -19,10 +19,9 @@ import { fromString } from "uuidv4";
 
 import styles from "./page.module.sass";
 
-import localFont from 'next/font/local';
+import localFont from "next/font/local";
 
-
-const vortexFont = localFont({ src: '../../public/fonts/Vortex-Mix.otf' })
+const vortexFont = localFont({ src: "../../public/fonts/Vortex-Mix.otf" });
 
 const GET_EVENTS = "https://events.vortex.foundation/events";
 
@@ -69,7 +68,11 @@ export default function Content() {
                                 type: "ADD",
                                 payload: {
                                     date: start.format("MM/DD/YYYY"),
-                                    info: { ...ev, id: id, datesRange: dateConstructor },
+                                    info: {
+                                        ...ev,
+                                        id: id,
+                                        datesRange: dateConstructor,
+                                    },
                                 },
                             });
                         }
@@ -80,21 +83,25 @@ export default function Content() {
 
     return (
         <div className={`${styles.pageContainer}`}>
-            <div className={styles.title}>
-                <Text className={`${styles.titleText} ${vortexFont.className}`} variant="display-3">
-                    evnts
-                </Text>
-            </div>
-
+            <header className={styles.header}>
+                <div className={styles.title}>
+                    <Text
+                        className={`${styles.titleText} ${vortexFont.className}`}
+                        variant="display-3"
+                    >
+                        evnts
+                    </Text>
+                </div>
+            </header>
             <div className={styles.content}>
-                <main className={styles.main}>
-                    <WeekWrapper />
-                    {selectedEvent && <EventCard />}
-                </main>
                 <aside>
-                    <CalendarWrapper />
                     <UpcomingEvents />
                 </aside>
+                <main className={styles.main}>
+                    <WeekWrapper />
+                    <CalendarWrapper />
+                    {selectedEvent && <EventCard />}
+                </main>
             </div>
         </div>
     );

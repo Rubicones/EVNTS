@@ -3,10 +3,9 @@ $accent: #9DFF48
 .upcomingWrapper
     display: flex
     flex-direction: column
-
-    width: 350px
-    height: calc(100vh - 350px)
-
+    gap: 10px
+    width: 400px
+    max-height: 100%
     margin-top: 20px
 
     .upcomingHeader
@@ -19,6 +18,12 @@ $accent: #9DFF48
 
         display: flex
         gap: 1%
+        align-items: center
+        flex-wrap: wrap
+
+        label
+            display: flex
+            align-items: center
 
         .navSearch
             width: 64%
@@ -31,6 +36,7 @@ $accent: #9DFF48
         display: flex
         height: 100%
         max-height: 100%
+        min-height: 100px
 
         margin-top: 10px
 
@@ -38,7 +44,7 @@ $accent: #9DFF48
 
         flex-direction: column
         justify-content: flex-start
-        gap: 5px
+        gap: 7px
 
         &::-webkit-scrollbar
             display: none
@@ -53,9 +59,9 @@ $accent: #9DFF48
             grid-template-columns: 30% 30% 30%
             gap: 3%
 
-            // background-color: $accentTransp
             border-radius: 10px                   
             border: 2px $accent solid
+
             .eventGridContainer
                 display: flex
                 align-items: center             
