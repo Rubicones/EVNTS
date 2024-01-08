@@ -9,6 +9,8 @@ import dayjs from "dayjs";
 
 import styles from "./upcomingEvents.module.sass";
 
+import EventCard from "../eventCard/eventCard";
+
 import localFont from "next/font/local";
 
 const vortexFont = localFont({
@@ -16,13 +18,19 @@ const vortexFont = localFont({
 });
 
 const EventSmallCard = ({ info, title, location, isPast, isFirstUpcoming }) => {
+    const [isHovered, setIsHovered] = useState(false);
     const container = useRef(null);
     const dispatch = useDispatch();
+    const selectedEvent = useSelector((store) => store.selectedEvent);
 
     const selectEvent = () => {
         dispatch({ type: "SELECT_DATE", payload: info.date_start });
         dispatch({ type: "SELECT_EVENT", payload: info });
     };
+
+    useEffect(() => {
+        isHovered && dispatch({ type: "SELECT_EVENT", payload: info });
+    }, [isHovered])
 
     useEffect(() => {
         if (
@@ -38,28 +46,33 @@ const EventSmallCard = ({ info, title, location, isPast, isFirstUpcoming }) => {
     }, [isFirstUpcoming]);
 
     return (
-        <div
-            ref={container}
-            className={styles.smallEventContainer}
-            style={isPast ? { borderColor: "#747474" } : {}}
-            onClick={selectEvent}
-        >
-            <div className={styles.eventGridContainer}>
-                <div className={styles.date}>
-                    <Text variant="subheader-1" color="dark-primary">
-                        {info.datesRange}
+        <>
+            <div
+                ref={container}
+                className={styles.smallEventContainer}
+                style={isPast ? { borderColor: "#747474" } : {}}
+                onClick={selectEvent}
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
+            >
+                <div className={styles.eventGridContainer}>
+                    <div className={styles.date}>
+                        <Text variant="subheader-1" color="dark-primary">
+                            {info.datesRange}
+                        </Text>
+                    </div>
+                </div>
+                <div className={styles.eventGridContainer}>
+                    <Text variant="body-2">{title}</Text>
+                </div>
+                <div className={styles.eventGridContainer}>
+                    <Text variant="body-1" color="light-secondary">
+                        {location}
                     </Text>
                 </div>
             </div>
-            <div className={styles.eventGridContainer}>
-                <Text variant="body-2">{title}</Text>
-            </div>
-            <div className={styles.eventGridContainer}>
-                <Text variant="body-1" color="light-secondary">
-                    {location}
-                </Text>
-            </div>
-        </div>
+            {isHovered && <EventCard top={container.current.getBoundingClientRect().top} height={container.current.getBoundingClientRect().bottom - container.current.getBoundingClientRect().y}/>}
+        </>
     );
 };
 
@@ -71,6 +84,7 @@ export default function UpcomingEvents() {
     const [rowEventsFiltered, setRowEventsFiltered] = useState({});
     const [query, setQuery] = useState("");
     const [isPastShown, setIsPastShown] = useState(false);
+
     const events = useSelector((state) => state.events);
 
     const sortEvents = (eventsArr) => {
@@ -161,9 +175,7 @@ export default function UpcomingEvents() {
     return (
         <ThemeProvider theme="light">
             <div className={styles.upcomingWrapper}>
-                <Text variant="header-2">
-                    Upcoming Events
-                </Text>
+                <Text variant="header-2">Upcoming Events</Text>
                 <div className={styles.upcomingNavbar}>
                     <TextInput
                         className={styles.navSearch}
@@ -189,11 +201,7 @@ export default function UpcomingEvents() {
                         ))}
                     </Select>
                 </div>
-                <Checkbox
-                    
-                    size="l"
-                    onChange={() => setIsPastShown((o) => !o)}
-                >
+                <Checkbox size="l" onChange={() => setIsPastShown((o) => !o)}>
                     Show Past Events
                 </Checkbox>
 

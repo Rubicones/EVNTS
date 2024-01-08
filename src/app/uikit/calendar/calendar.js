@@ -8,41 +8,66 @@ import { v4 as uuidv4 } from "uuid";
 
 import { useSelector, useDispatch } from "react-redux";
 
-import ChevronLeftIcon from '../../../../public/icons/chevron-left.svg';
-import ChevronRightIcon from '../../../../public/icons/chevron-right.svg';
+import ChevronLeftIcon from "../../../../public/icons/chevron-left.svg";
+import ChevronRightIcon from "../../../../public/icons/chevron-right.svg";
 
-import { Text } from "@gravity-ui/uikit";
+import { Text, Tooltip } from "@gravity-ui/uikit";
 
 import styles from "./calendar.module.sass";
 
+import CalendarTooltip from "./calendarTooltip/calendarTooltip";
 
 const CalendarDay = ({ date, hasEvent, highlighted }) => {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
+    const events = useSelector((state) => state.events);
+
+    const thisSht = events[date.format("MM/DD/YYYY")] ? <CalendarTooltip date={date}/> : <></>
 
     const selectEvent = () => {
-        dispatch({type: "SELECT_DATE", payload: date.format("MM/DD/YYYY")})
-    }
+        dispatch({ type: "SELECT_DATE", payload: date.format("MM/DD/YYYY") });
+    };
     return (
-        <div className={styles.calendarDay} onClick={selectEvent} style={date.isSame(highlighted, "day")? {border: "#9DFF48 2px solid"} : {}}>
-            <Text variant="body-1">{date.date()}</Text>
-            <div className={styles.calendarEventIndicator} style={hasEvent ? {backgroundColor: "#9DFF48"} : {}}/>
-        </div>
+        <Tooltip content={thisSht} openDelay="100" closeDelay="250">
+            <div
+                className={styles.calendarDay}
+                onClick={selectEvent}
+                style={
+                    date.isSame(highlighted, "day")
+                        ? { border: "#9DFF48 2px solid" }
+                        : {}
+                }
+            >
+                <Text variant="body-1">{date.date()}</Text>
+                <div
+                    className={styles.calendarEventIndicator}
+                    style={hasEvent ? { backgroundColor: "#9DFF48" } : {}}
+                />
+            </div>
+        </Tooltip>
     );
 };
 
 const Calendar = ({ payload }) => {
     const [days, setDays] = useState([]);
     const events = useSelector((state) => state.events);
-    const selected = useSelector(state => state.selectedDate)
+    const selected = useSelector((state) => state.selectedDate);
 
     useEffect(() => {
         let firstDayOfMonth = payload.startOf("month");
         let lastDayOfMonth = payload.endOf("month");
         let daysOfMonth = [];
 
-        while (!firstDayOfMonth.add(-1, 'day').isSame(lastDayOfMonth, "day")) {
+        while (!firstDayOfMonth.add(-1, "day").isSame(lastDayOfMonth, "day")) {
             daysOfMonth.push(
-                <CalendarDay highlighted={dayjs(selected, "MM/DD/YYYY")} key={uuidv4()} date={firstDayOfMonth} hasEvent={events[firstDayOfMonth.format("MM/DD/YYYY")] !== undefined} />
+                <CalendarDay
+                    highlighted={dayjs(selected, "MM/DD/YYYY")}
+                    key={uuidv4()}
+                    date={firstDayOfMonth}
+                    hasEvent={
+                        events[firstDayOfMonth.format("MM/DD/YYYY")] !==
+                        undefined
+                    }
+                />
             );
             firstDayOfMonth = firstDayOfMonth.add(1, "day");
         }
@@ -54,18 +79,19 @@ const Calendar = ({ payload }) => {
 
 export default function CalendarWrapper() {
     const [payload, setPayload] = useState(dayjs());
-    const selectedDate = useSelector(state => state.selectedDate)
+    const selectedDate = useSelector((state) => state.selectedDate);
 
     useEffect(() => {
-        if (selectedDate)
-            setPayload(dayjs(selectedDate, "MM/DD/YYYY"))
-    }, [selectedDate])
-    
+        if (selectedDate) setPayload(dayjs(selectedDate, "MM/DD/YYYY"));
+    }, [selectedDate]);
+
     return (
         <div className={styles.calendarWrapper}>
             <div className={styles.calendarNavbar}>
                 <Text variant="header-1">Events Calendar</Text>
-                <Text variant="body-2" className={`${styles.calendarMonth}`}>{payload.format("MMMM")}</Text>
+                <Text variant="body-2" className={`${styles.calendarMonth}`}>
+                    {payload.format("MMMM")}
+                </Text>
                 <div className={styles.navButtons}>
                     <Image
                         src={ChevronLeftIcon}

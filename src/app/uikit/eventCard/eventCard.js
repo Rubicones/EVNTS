@@ -10,7 +10,7 @@ import { Text } from "@gravity-ui/uikit";
 
 import styles from "./eventCard.module.sass";
 
-export default function EventCard() {
+export default function EventCard({top, height}) {
     const [eventInfo, setEventInfo] = useState({});
     const selectedEvent = useSelector((state) => state.selectedEvent);
     const dispatch = useDispatch()
@@ -20,35 +20,35 @@ export default function EventCard() {
     }, [selectedEvent]);
 
     return (
-        <div className={styles.eventCardWrapper}>
-            <Image src={xMark} alt="close event card" width={25} height={25} className={styles.close} onClick={() => dispatch({type: "SELECT_EVENT", payload: null})}/>
+        <div className={styles.eventCardWrapper} style={{top: top - height / 2}}>
+            {/* <Image src={xMark} alt="close event card" width={25} height={25} className={styles.close} onClick={() => dispatch({type: "SELECT_EVENT", payload: null})}/> */}
             <div className={styles.date} >
-                <Text variant="subheader-3" color="dark-primary">{eventInfo.datesRange}</Text>
+                <Text variant="subheader-1" color="dark-primary">{eventInfo.datesRange}</Text>
             </div>
             <div className={styles.infoBlock}>
-                <Text ellipsis="true" variant="subheader-3">
+                <Text ellipsis="true" variant="subheader-1">
                     {eventInfo.title}
                 </Text>
                 <Text
                     ellipsis="true"
-                    variant="subheader-2"
-                    color="dark-secondary"
+                    variant="body-1"
+                    // color="dark-secondary"
                 >
                     {eventInfo.location}
                 </Text>
                 <Link href={eventInfo.url ? "https://" + eventInfo.url : ""} passHref={true}>
-                    <Text ellipsis="true" variant="body-3">
+                    <Text ellipsis="true" variant="body-1">
                         {eventInfo.url}
                     </Text>
                 </Link>
 
-                <Text style={{ marginTop: "auto" }} variant="body-3">
+                <Text style={{ marginTop: "auto" }} variant="body-1">
                     {eventInfo.ticket_price}
                 </Text>
             </div>
 
-            <Text variant="body-2">
-                <Text variant="subheader-2">
+            <Text variant="body-1">
+                <Text variant="subheader-1">
                     Description: <br />
                 </Text>
                 {eventInfo.description}
