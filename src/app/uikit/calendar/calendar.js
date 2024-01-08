@@ -24,7 +24,7 @@ const CalendarDay = ({ date, hasEvent, highlighted }) => {
     }
     return (
         <div className={styles.calendarDay} onClick={selectEvent} style={date.isSame(highlighted, "day")? {border: "#9DFF48 2px solid"} : {}}>
-            <Text variant="body-2">{date.date()}</Text>
+            <Text variant="body-1">{date.date()}</Text>
             <div className={styles.calendarEventIndicator} style={hasEvent ? {backgroundColor: "#9DFF48"} : {}}/>
         </div>
     );

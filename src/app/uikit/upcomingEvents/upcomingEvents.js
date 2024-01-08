@@ -161,7 +161,7 @@ export default function UpcomingEvents() {
     return (
         <ThemeProvider theme="light">
             <div className={styles.upcomingWrapper}>
-                <Text variant="header-2" className={`${vortexFont.className}`}>
+                <Text variant="header-2">
                     Upcoming Events
                 </Text>
                 <div className={styles.upcomingNavbar}>

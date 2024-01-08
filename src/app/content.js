@@ -17,7 +17,7 @@ import "@gravity-ui/uikit/styles/styles.css";
 
 import { fromString } from "uuidv4";
 
-import styles from "./page.module.sass";
+import styles from "./content.module.sass";
 
 import localFont from "next/font/local";
 
@@ -85,21 +85,43 @@ export default function Content() {
         <div className={`${styles.pageContainer}`}>
             <header className={styles.header}>
                 <div className={styles.title}>
-                    <Text
-                        className={`${styles.titleText} ${vortexFont.className}`}
-                        variant="display-3"
-                    >
-                        evnts
-                    </Text>
+                    <span>
+                        <Text
+                            className={`${styles.titleText} ${vortexFont.className} ${styles.alternativeGlyph}`}
+                            variant="display-3"
+                        >
+                            e
+                        </Text>
+
+                        <Text
+                            className={`${styles.titleText} ${vortexFont.className}`}
+                            variant="display-3"
+                        >
+                            vn
+                        </Text>
+                        <Text
+                            className={`${styles.titleText} ${vortexFont.className}  ${styles.alternativeGlyph}`}
+                            variant="display-3"
+                        >
+                            t
+                        </Text>
+                        <Text
+                            className={`${styles.titleText} ${vortexFont.className}`}
+                            variant="display-3"
+                        >
+                            s
+                        </Text>
+                    </span>
                 </div>
             </header>
             <div className={styles.content}>
                 <aside>
                     <UpcomingEvents />
+                    <CalendarWrapper />
+
                 </aside>
                 <main className={styles.main}>
                     <WeekWrapper />
-                    <CalendarWrapper />
                     {selectedEvent && <EventCard />}
                 </main>
             </div>
