@@ -32,7 +32,6 @@ export default function MinimizedContent() {
         fetch(GET_EVENTS)
             .then((res) => res.json())
             .then((eventsArr) => {
-                console.log(eventsArr.data)
                 eventsArr.data.forEach((ev) => {
                     let id = fromString(JSON.stringify(ev));
                     let dateConstructor = "";
@@ -59,25 +58,27 @@ export default function MinimizedContent() {
                         },
                     });
 
-                    // if (ev.date_end) {
-                    //     let start = dayjs(ev.date_start, "MM/DD/YYYY");
-                    //     let end = dayjs(ev.date_end, "MM/DD/YYYY");
+                    if (ev.date_end) {
+                        let start = dayjs(ev.date_start, "MM/DD/YYYY");
+                        let end = dayjs(ev.date_end, "MM/DD/YYYY");
 
-                    //     while (!start.isSame(end, "day")) {
-                    //         start = start.add(1, "day");
-                    //         dispatch({
-                    //             type: "ADD",
-                    //             payload: {
-                    //                 date: start.format("MM/DD/YYYY"),
-                    //                 info: {
-                    //                     ...ev,
-                    //                     id: id,
-                    //                     datesRange: dateConstructor,
-                    //                 },
-                    //             },
-                    //         });
-                    //     }
-                    // }
+                        if (end.diff(start) > 0) {
+                            while (!start.isSame(end, "day")) {
+                                start = start.add(1, "day");
+                                dispatch({
+                                    type: "ADD",
+                                    payload: {
+                                        date: start.format("MM/DD/YYYY"),
+                                        info: {
+                                            ...ev,
+                                            id: id,
+                                            datesRange: dateConstructor,
+                                        },
+                                    },
+                                });
+                            }
+                        }
+                    }
                 });
             });
     }, []);
@@ -112,7 +113,6 @@ export default function MinimizedContent() {
                         >
                             s
                         </Text>
-
                     </span>
                 </div>
             </header>
